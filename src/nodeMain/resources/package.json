@@ -1,0 +1,17 @@
+{
+  "name": "kotlin-multiplatform-demo",
+  "version": "1.0.0",
+  "description": "A simple demo for Kotlin Multiplatform",
+  "main": "multiplatform-demo.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mistborn94/kotlin-multiplatform-demo.git"
+  },
+  "scripts": {
+    "start": "node multiplatform-demo.js"
+  },
+  "author": "Renette Ros",
+  "dependencies": {
+    "kotlin": "^1.3.41"
+  }
+}
