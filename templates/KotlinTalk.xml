@@ -1,10 +1,10 @@
 <templateSet group="KotlinTalk">
-  <template name="//kplugin" value="plugins {&#10;    kotlin(&quot;multiplatform&quot;) version &quot;1.3.21&quot;&#10;}&#10;&#10;kotlin {&#10;    jvm()&#10;    js(&quot;node&quot;)&#10;&#10;    //ksources&#10;}&#10;&#10;//jsconfig" description="Kotlin plugin block" toReformat="false" toShortenFQNames="false">
+  <template name="//kplugin" value="plugins {&#10;    kotlin(&quot;multiplatform&quot;) version &quot;1.3.21&quot;&#10;}&#10;&#10;kotlin {&#10;    jvm()&#10;    js(&quot;web&quot;)&#10;&#10;    //ksources$END$ &#10;}&#10;&#10;//jsmodule" description="Kotlin plugin block" toReformat="false" toShortenFQNames="false">
     <context>
       <option name="KOTLIN" value="true" />
     </context>
   </template>
-  <template name="//ksources" value="sourceSets {&#10;    commonMain {&#10;        dependencies {&#10;            implementation(kotlin(&quot;stdlib-common&quot;))&#10;        }&#10;    }&#10;&#10;    commonTest {&#10;        dependencies {&#10;            implementation(kotlin(&quot;test-common&quot;))&#10;            implementation(kotlin(&quot;test-annotations-common&quot;))&#10;        }&#10;    }&#10;    &#10;    //javasources&#10;    &#10;    //jssources&#10;}" description="Kotlin sourcesets block" toReformat="true" toShortenFQNames="true">
+  <template name="//ksources" value="sourceSets {&#10;    commonMain {&#10;        dependencies {&#10;            implementation(kotlin(&quot;stdlib-common&quot;))&#10;        }&#10;    }&#10;&#10;    commonTest {&#10;        dependencies {&#10;            implementation(kotlin(&quot;test-common&quot;))&#10;            implementation(kotlin(&quot;test-annotations-common&quot;))&#10;        }&#10;    }&#10;    &#10;    //javasources$END$ &#10;    &#10;    //jssources&#10;}" description="Kotlin sourcesets block" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="KOTLIN" value="true" />
     </context>
@@ -14,17 +14,17 @@
       <option name="KOTLIN" value="true" />
     </context>
   </template>
-  <template name="//jssources" value="val nodeMain by getting {&#10;    dependencies {&#10;        implementation(kotlin(&quot;stdlib-js&quot;))&#10;    }&#10;}" description="javascript source sets block" toReformat="true" toShortenFQNames="true">
+  <template name="//jssources" value="val webMain by getting {&#10;    dependencies {&#10;        implementation(kotlin(&quot;stdlib-js&quot;))&#10;    }&#10;}" description="javascript source sets block" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="KOTLIN" value="true" />
     </context>
   </template>
-  <template name="//jsconfig" value="/**&#10; * Change the bundle type to make it work with npm packages&#10; */&#10;kotlin.js(&quot;node&quot;).compilations[&quot;main&quot;].kotlinOptions {&#10;    moduleKind = &quot;umd&quot;&#10;}&#10;&#10;//jsbuild" description="Javscript addtional config" toReformat="false" toShortenFQNames="true">
+  <template name="//jsmodule" value="/**&#10; * Change the bundle type to make it work with npm packages&#10; */&#10;kotlin.js(&quot;web&quot;).compilations[&quot;main&quot;].kotlinOptions {&#10;    moduleKind = &quot;umd&quot;&#10;}&#10;&#10;//jsbuild$END$ " description="Javscript addtional config" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="KOTLIN" value="true" />
     </context>
   </template>
-  <template name="//jsbuild" value="/**&#10; * A build step to copy all js files + the package json the the node-package directory&#10; */&#10;task&lt;Sync&gt;(&quot;jsPackage&quot;) {&#10;    group = &quot;build&quot;&#10;    val output = kotlin.js(&quot;node&quot;).compilations[&quot;main&quot;].output&#10;&#10;    //node_modules is preserved for local npm folder installs&#10;    preserve {&#10;        include(&quot;node_modules&quot;, &quot;package-lock.json&quot;)&#10;    }&#10;&#10;    output.classesDirs.forEach {&#10;        from(it) {&#10;            include(&quot;*.js&quot;)&#10;            exclude(&quot;*.meta.js&quot;)&#10;        }&#10;    }&#10;    from(output.resourcesDir)&#10;&#10;    into(&quot;$buildDir/package&quot;)&#10;&#10;    mustRunAfter(&quot;nodeMainClasses&quot;)&#10;}&#10;&#10;tasks[&quot;build&quot;].dependsOn(&quot;jsPackage&quot;)" description="Javascript package task" toReformat="false" toShortenFQNames="true">
+  <template name="//jsbuild" value="/**&#10; * A build step to copy all js files + the package json to the `build/package` directory&#10; */&#10;task&lt;Sync&gt;(&quot;jsPackage&quot;) {&#10;    group = &quot;build&quot;&#10;    val output = kotlin.js(&quot;web&quot;).compilations[&quot;main&quot;].output&#10;&#10;    //node_modules is preserved for local npm folder installs&#10;    preserve {&#10;        include(&quot;node_modules&quot;, &quot;package-lock.json&quot;)&#10;    }&#10;&#10;    output.classesDirs.forEach {&#10;        from(it) {&#10;            include(&quot;*.js&quot;)&#10;            exclude(&quot;*.meta.js&quot;)&#10;        }&#10;    }&#10;    from(output.resourcesDir)&#10;&#10;    into(&quot;$buildDir/package&quot;)&#10;&#10;    mustRunAfter(&quot;webMainClasses&quot;)&#10;}&#10;&#10;tasks[&quot;build&quot;].dependsOn(&quot;jsPackage&quot;)" description="Javascript package task" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="KOTLIN" value="true" />
     </context>

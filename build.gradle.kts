@@ -8,7 +8,7 @@ plugins {
 
 kotlin {
     jvm()
-    js("node")
+    js("web")
 
     sourceSets {
         commonMain {
@@ -30,24 +30,27 @@ kotlin {
             }
         }
 
-        val nodeMain by getting {
+        val webMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
             }
         }
     }
-
-    js("node").compilations["main"].kotlinOptions {
-        moduleKind = "umd"
-    }
 }
 
 /**
- * A build step to copy all js files + the package json the the node-package directory
+ * Change the bundle type to make it work with npm packages
+ */
+kotlin.js("web").compilations["main"].kotlinOptions {
+    moduleKind = "umd"
+}
+
+/**
+ * A build step to copy all js files + the package json to the `build/package` directory
  */
 task<Sync>("jsPackage") {
     group = "build"
-    val output = kotlin.js("node").compilations["main"].output
+    val output = kotlin.js("web").compilations["main"].output
 
     //node_modules is preserved for local npm folder installs
     preserve {
@@ -64,7 +67,7 @@ task<Sync>("jsPackage") {
 
     into("$buildDir/package")
 
-    mustRunAfter("nodeMainClasses")
+    mustRunAfter("webMainClasses")
 }
 
 tasks["build"].dependsOn("jsPackage")
