@@ -1,5 +1,5 @@
 <templateSet group="KotlinTalk">
-  <template name="//kplugin" value="plugins {&#10;    kotlin(&quot;multiplatform&quot;) version &quot;1.3.21&quot;&#10;}&#10;&#10;kotlin {&#10;    jvm()&#10;    js(&quot;web&quot;)&#10;&#10;    //ksources$END$ &#10;}&#10;&#10;//jsmodule" description="Kotlin plugin block" toReformat="false" toShortenFQNames="false">
+  <template name="//kplugin" value="plugins {&#10;    kotlin(&quot;multiplatform&quot;) version &quot;1.3.50&quot;&#10;}&#10;&#10;kotlin {&#10;    jvm()&#10;    js(&quot;web&quot;)&#10;&#10;    //ksources$END$ &#10;}&#10;&#10;//jsmodule" description="Kotlin plugin block" toReformat="false" toShortenFQNames="false">
     <context>
       <option name="KOTLIN" value="true" />
     </context>

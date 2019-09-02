@@ -3,7 +3,7 @@ repositories {
 }
 
 plugins {
-    kotlin("multiplatform") version "1.3.21"
+    kotlin("multiplatform") version "1.3.50"
 }
 
 kotlin {
