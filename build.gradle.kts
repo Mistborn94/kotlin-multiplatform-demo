@@ -71,3 +71,10 @@ task<Sync>("jsPackage") {
 }
 
 tasks["build"].dependsOn("jsPackage")
+
+task<JavaExec>("execute") {
+    val compilation = kotlin.jvm().compilations["main"]
+    main = "MainKt"
+    classpath(compilation.output.allOutputs, compilation.runtimeDependencyFiles)
+    dependsOn("jvmMainClasses")
+}
