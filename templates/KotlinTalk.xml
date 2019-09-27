@@ -24,7 +24,12 @@
       <option name="KOTLIN" value="true" />
     </context>
   </template>
-  <template name="//jsbuild" value="/**&#10; * A build step to copy all js files + the package json to the `build/package` directory&#10; */&#10;task&lt;Sync&gt;(&quot;jsPackage&quot;) {&#10;    group = &quot;build&quot;&#10;    val output = kotlin.js(&quot;web&quot;).compilations[&quot;main&quot;].output&#10;&#10;    //node_modules is preserved for local npm folder installs&#10;    preserve {&#10;        include(&quot;node_modules&quot;, &quot;package-lock.json&quot;)&#10;    }&#10;&#10;    output.classesDirs.forEach {&#10;        from(it) {&#10;            include(&quot;*.js&quot;)&#10;            exclude(&quot;*.meta.js&quot;)&#10;        }&#10;    }&#10;    from(output.resourcesDir)&#10;&#10;    into(&quot;$buildDir/package&quot;)&#10;&#10;    mustRunAfter(&quot;webMainClasses&quot;)&#10;}&#10;&#10;tasks[&quot;build&quot;].dependsOn(&quot;jsPackage&quot;)" description="Javascript package task" toReformat="true" toShortenFQNames="true">
+  <template name="//jsbuild" value="/**&#10; * A build step to copy all js files + the package json to the `build/package` directory&#10; */&#10;task&lt;Sync&gt;(&quot;jsPackage&quot;) {&#10;    group = &quot;build&quot;&#10;    val output = kotlin.js(&quot;web&quot;).compilations[&quot;main&quot;].output&#10;&#10;    //node_modules is preserved for local npm folder installs&#10;    preserve {&#10;        include(&quot;node_modules&quot;, &quot;package-lock.json&quot;)&#10;    }&#10;&#10;    output.classesDirs.forEach {&#10;        from(it) {&#10;            include(&quot;*.js&quot;)&#10;            exclude(&quot;*.meta.js&quot;)&#10;        }&#10;    }&#10;    from(output.resourcesDir)&#10;&#10;    into(&quot;$buildDir/package&quot;)&#10;&#10;    mustRunAfter(&quot;webMainClasses&quot;)&#10;}&#10;&#10;tasks[&quot;build&quot;].dependsOn(&quot;jsPackage&quot;)&#10;&#10;//javaexec" description="Javascript package task" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="//javaexec" value="task&lt;JavaExec&gt;(&quot;execute&quot;) {&#10;    val compilation = kotlin.jvm().compilations[&quot;main&quot;]&#10;    main = &quot;MainKt&quot;&#10;    classpath(compilation.output.allOutputs, compilation.runtimeDependencyFiles)&#10;    dependsOn(&quot;jvmMainClasses&quot;)&#10;}" description="Gradle task to Execute jvm main class" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="KOTLIN" value="true" />
     </context>
